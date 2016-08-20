@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<title th:text="${user.html_url}"></title>
+</head>
+<body>
+	<h1 layout:fragment="header">Repositories</h1>
+	<div layout:fragment="content" class="container">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<td>ID</td>
+					<td>Created</td>
+					<td>Summary</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${repositories.empty}">
+					<td colspan="3">No Repository</td>
+				</tr>
+				<tr th:each="repository : ${repositories}">
+					<td th:text="${repository.id}"></td>
+					<td th:text="${repository.created_at}">No Date</td>
+					<td><a th:href="@{${repository.html_url}}" th:text="${repository.clone_url}"></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
